@@ -1,8 +1,6 @@
 package com.vikovalfo.hcm_be.services;
 
 import com.vikovalfo.hcm_be.models.Employee;
-import com.vikovalfo.hcm_be.models.dtos.EmployeeDto;
-import com.vikovalfo.hcm_be.models.mappers.EmployeeDtoToEmployeeMapper;
 import com.vikovalfo.hcm_be.repositories.EmployeeRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +15,7 @@ public class EmployeeService {
     private EmployeeRepository employeeRepository;
 
     @Transactional
-    public Employee createNewEmployee(EmployeeDto employeeDto) {
-        Employee employee = EmployeeDtoToEmployeeMapper.transform(employeeDto);
+    public Employee createNewEmployee(Employee employee) {
         return employeeRepository.save(employee);
     }
 

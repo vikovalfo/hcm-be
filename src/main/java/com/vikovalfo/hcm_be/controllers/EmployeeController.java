@@ -1,7 +1,6 @@
 package com.vikovalfo.hcm_be.controllers;
 
 import com.vikovalfo.hcm_be.models.Employee;
-import com.vikovalfo.hcm_be.models.dtos.EmployeeDto;
 import com.vikovalfo.hcm_be.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,8 +30,8 @@ public class EmployeeController {
     }
 
     @RequestMapping(method = POST, path = "new-employee")
-    public Employee getEmployee(@RequestBody EmployeeDto employeeDto){
-        return employeeService.createNewEmployee(employeeDto);
+    public Employee getEmployee(@RequestBody Employee employee){
+        return employeeService.createNewEmployee(employee);
     }
 
     @RequestMapping(method = PUT, path = "update-employee/{id}")
