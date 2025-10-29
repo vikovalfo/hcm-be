@@ -4,6 +4,8 @@ import com.vikovalfo.hcm_be.models.Employee;
 import com.vikovalfo.hcm_be.models.dtos.EmployeeDto;
 import com.vikovalfo.hcm_be.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -19,11 +21,8 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @RequestMapping(method = GET, path = "list-employees")
-    public List<EmployeeDto> listEmployees(){
-        EmployeeDto employee = new EmployeeDto("Alessa");
-        List<EmployeeDto> list = new ArrayList<>();
-        list.add(employee);
-        return list;
+    public List<Employee> listEmployees(){
+        return employeeService.getEmployees();
     }
 
     @RequestMapping(method = GET, path = "employee-details/{id}")
@@ -36,14 +35,15 @@ public class EmployeeController {
         return employeeService.createNewEmployee(employeeDto);
     }
 
-    @RequestMapping(method = PUT, path = "update-employee")
-    public EmployeeDto updateEmployee(){
-        return new EmployeeDto("Alessa");
+    @RequestMapping(method = PUT, path = "update-employee/{id}")
+    public Employee updateEmployee(@PathVariable("id") Long id, @RequestBody Employee employee){
+        return employeeService.updateEmployee(id, employee);
     }
 
-    @RequestMapping(method = DELETE, path = "delete-employee")
-    public EmployeeDto deleteEmployee(){
-        return new EmployeeDto("Alessa");
+    @RequestMapping(method = DELETE, path = "delete-employee/{id}")
+    public ResponseEntity<String> deleteEmployee(@PathVariable("id") Long id){
+        employeeService.deleteEmployee(id);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
 }
