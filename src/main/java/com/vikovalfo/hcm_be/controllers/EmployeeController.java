@@ -1,6 +1,9 @@
 package com.vikovalfo.hcm_be.controllers;
 
+import com.vikovalfo.hcm_be.models.Employee;
 import com.vikovalfo.hcm_be.models.dtos.EmployeeDto;
+import com.vikovalfo.hcm_be.services.EmployeeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -12,6 +15,9 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 @RequestMapping("/api")
 public class EmployeeController {
 
+    @Autowired
+    private EmployeeService employeeService;
+
     @RequestMapping(method = GET, path = "list-employees")
     public List<EmployeeDto> listEmployees(){
         EmployeeDto employee = new EmployeeDto("Alessa");
@@ -20,14 +26,14 @@ public class EmployeeController {
         return list;
     }
 
-    @RequestMapping(method = GET, path = "employee-details")
-    public EmployeeDto newEmployee(){
-        return new EmployeeDto("Alessa");
+    @RequestMapping(method = GET, path = "employee-details/{id}")
+    public Employee newEmployee(@PathVariable("id") Long id){
+        return employeeService.getEmployee(id);
     }
 
     @RequestMapping(method = POST, path = "new-employee")
-    public EmployeeDto getEmployee(){
-        return new EmployeeDto("Alessa");
+    public Employee getEmployee(@RequestBody EmployeeDto employeeDto){
+        return employeeService.createNewEmployee(employeeDto);
     }
 
     @RequestMapping(method = PUT, path = "update-employee")
