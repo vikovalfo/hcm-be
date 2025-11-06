@@ -8,6 +8,7 @@ import lombok.ToString;
 import java.io.Serializable;
 
 @Entity
+@Table
 @Getter
 @Setter
 @ToString
