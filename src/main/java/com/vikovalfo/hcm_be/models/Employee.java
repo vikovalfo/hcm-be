@@ -18,4 +18,10 @@ public class Employee implements Serializable {
     private long id;
     @Column
     private String name;
+    @Column
+    private boolean isDeleted;
+
+    public Employee() {
+        this.isDeleted = false;
+    }
 }

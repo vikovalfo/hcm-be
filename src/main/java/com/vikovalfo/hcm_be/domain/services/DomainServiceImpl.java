@@ -32,7 +32,7 @@ public abstract class DomainServiceImpl<T, ID> implements DomainService<T, ID> {
     public T update(ID id, T entity) {
         Optional<T> optional = repository.findById(id);
         if (optional.isPresent()) {
-            T updated = repository.save(optional.get());
+            T updated = repository.save(entity);
             return updated;
 
         } else
