@@ -16,34 +16,32 @@ import com.vikovalfo.hcm_be.domain.services.DomainService;
 public abstract class DomainController<T, ID> {
 
     private final DomainService<T, ID> service;
-    private final String[] misc;
 
-    protected DomainController(DomainService<T, ID> service, String[] misc){
+    protected DomainController(DomainService<T, ID> service){
         this.service = service;
-        this.misc = misc;
     }
      
-    @RequestMapping(method = GET, path = "list-employees")
-    public Iterable<T> list(){
+    @RequestMapping(method = GET, path = "/list")
+    public Iterable<T> list() {
         return service.getAll();
     }
 
-    @RequestMapping(method = GET, path = "employee-details/{id}")
+    @RequestMapping(method = GET, path = "/details/{id}")
     public T get(@PathVariable("id") ID id){
         return service.get(id);
     }
 
-    @RequestMapping(method = POST, path = "new-employee")
+    @RequestMapping(method = POST, path = "/new")
     public T create(@RequestBody T entity){
         return service.create(entity);
     }
 
-    @RequestMapping(method = PUT, path = "update-employee/{id}")
+    @RequestMapping(method = PUT, path = "/update/{id}")
     public T update(@PathVariable("id") ID id, @RequestBody T entity){
         return service.update(id, entity);
     }
 
-    @RequestMapping(method = DELETE, path = "delete-employee/{id}")
+    @RequestMapping(method = DELETE, path = "/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") ID id){
         service.delete(id);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);

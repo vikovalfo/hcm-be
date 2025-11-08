@@ -13,17 +13,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/employee")
 public class EmployeeController extends DomainController<Employee, Long> {
     
     @Autowired
     private EmployeeService employeeService;
 
     public EmployeeController(DomainService<Employee, Long> service) {
-        super(service, new String[] { "employees", "employee" });
+        super(service);
     }
     
-    @RequestMapping(method = DELETE, path = "delete-employee/{id}")
+    @RequestMapping(method = DELETE, path = "/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id){
         employeeService.delete(id);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
