@@ -19,6 +19,22 @@ public class Employee implements Serializable {
     @Column
     private String name;
     @Column
+    private String lastName;
+    @Column
+    private String gender;
+    @Column
+    private int age;
+    @Column
+    private String address;
+    @Column
+    private String email;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "department_id", nullable = false)
+    private JobDepartment department;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "job_id", nullable = false)
+    private Job job;
+    @Column
     private boolean isDeleted;
 
     public Employee() {
