@@ -12,7 +12,8 @@ import java.io.Serializable;
 @Setter
 @ToString
 public class Payroll implements Serializable {
-    @Id
+	private static final long serialVersionUID = 1L;
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @Column

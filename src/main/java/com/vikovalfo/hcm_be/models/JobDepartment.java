@@ -14,7 +14,8 @@ import java.util.Set;
 @Setter
 @ToString
 public class JobDepartment implements Serializable {
-    @Id
+	private static final long serialVersionUID = 1L;
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     @Column

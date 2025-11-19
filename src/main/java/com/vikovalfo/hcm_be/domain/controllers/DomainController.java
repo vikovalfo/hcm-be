@@ -1,16 +1,8 @@
 package com.vikovalfo.hcm_be.domain.controllers;
 
-import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
-import static org.springframework.web.bind.annotation.RequestMethod.PUT;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.*;
 import com.vikovalfo.hcm_be.domain.services.DomainService;
 
 public abstract class DomainController<T, ID> {
@@ -21,28 +13,28 @@ public abstract class DomainController<T, ID> {
         this.service = service;
     }
      
-    @RequestMapping(method = GET, path = "/list")
+    @GetMapping("/list")
     public Iterable<T> list() {
         return service.getAll();
     }
 
-    @RequestMapping(method = GET, path = "/details/{id}")
-    public T get(@PathVariable("id") ID id){
+    @GetMapping("/details/{id}")
+    public T get(@PathVariable ID id){
         return service.get(id);
     }
 
-    @RequestMapping(method = POST, path = "/new")
+    @PostMapping("/new")
     public T create(@RequestBody T entity){
         return service.create(entity);
     }
 
-    @RequestMapping(method = PUT, path = "/update/{id}")
-    public T update(@PathVariable("id") ID id, @RequestBody T entity){
+    @PutMapping("/update/{id}")
+    public T update(@PathVariable ID id, @RequestBody T entity){
         return service.update(id, entity);
     }
 
-    @RequestMapping(method = DELETE, path = "/delete/{id}")
-    public ResponseEntity<String> delete(@PathVariable("id") ID id){
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> delete(@PathVariable ID id){
         service.delete(id);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
